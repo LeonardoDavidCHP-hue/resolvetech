@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: resolvetech
+
+  profiles:
+    active: dev
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 8080
