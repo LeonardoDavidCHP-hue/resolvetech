@@ -154,8 +154,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     private String generarNumeroTicket() {
-        long total = ticketRepository.count() + 1;
-        return String.format("RT%06d.26", total);
+        Long maxId = ticketRepository.obtenerMaxId();
+        long siguiente = (maxId == null ? 0 : maxId) + 1;
+        return String.format("RT%06d.26", siguiente);
     }
 
     @Override

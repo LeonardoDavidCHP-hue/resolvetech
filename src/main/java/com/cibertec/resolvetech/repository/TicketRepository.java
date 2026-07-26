@@ -13,8 +13,11 @@ public interface TicketRepository extends JpaRepository<Ticket, Long>  {
     Optional<Ticket> findByNumeroTicket(String numeroTicket);
 
     @EntityGraph(attributePaths = {"categoria", "sede", "estado", "tecnico"})
-    @Query("select t from Ticket t")
+    @Query("select t from Ticket t order by t.id asc")
     List<Ticket> listarTicketsConDetalle();
+
+    @Query("select max(t.id) from Ticket t")
+    Long obtenerMaxId();
 
     List<Ticket> findByEstado_NombreIgnoreCase(String nombreEstado);
 }
