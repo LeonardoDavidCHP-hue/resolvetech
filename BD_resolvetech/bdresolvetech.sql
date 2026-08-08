@@ -147,3 +147,17 @@ INNER JOIN categoria c ON c.id = t.id_categoria
 INNER JOIN sede s ON s.id = t.id_sede
 INNER JOIN estado e ON e.id = t.id_estado
 LEFT JOIN usuario u ON u.id = t.id_tecnico;
+
+-- actualizar base  de datos para admins o tecnicos registrados, en mi caso solo registre 1 tecnico mas
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE usuario SET password = '$2b$10$9deZ.B8mTMG/4ah/nK64TuhjBYWvevtP.PZArGyUooUYtGxLVifsm' WHERE nombre = 'admin';
+UPDATE usuario SET password = '$2b$10$iwdeAr8II7HAZV3YTBnLP.IghzOK8UtYm6lpBCsVwJ5XZJcMs9sgm' WHERE nombre = 'bodoque';
+UPDATE usuario SET password = '$2b$10$l12b8hisIC5LMW4fZTp31uH2o9vts/R8u0Afd7Ut9rJUIP/DO/KCa' WHERE nombre = 'Mario';
+UPDATE usuario SET password = '$2b$10$jq5jBYOMdO3lGAaiICs03.oIS/.ArGsOnlmhuost5ZaTBANi.ooP.' WHERE nombre = 'Anderson';
+UPDATE usuario SET password = '$2b$10$N4RUxjFkzJ9aDzLWTx/y5uVBcOHJMX.j5/tzvYiT/gDJhfkh.RHom' WHERE nombre = 'Tulio Triviño';
+
+SET SQL_SAFE_UPDATES = 1;
+
+SELECT nombre, password FROM usuario;

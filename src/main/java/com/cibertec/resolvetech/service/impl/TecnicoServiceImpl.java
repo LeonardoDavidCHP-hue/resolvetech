@@ -11,6 +11,7 @@ import com.cibertec.resolvetech.repository.TecnicoRepository;
 import com.cibertec.resolvetech.service.TecnicoService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -21,15 +22,18 @@ public class TecnicoServiceImpl implements TecnicoService {
     private final TecnicoRepository tecnicoRepository;
     private final SedeRepository sedeRepository;
     private final TecnicoMapper tecnicoMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public TecnicoServiceImpl(
             TecnicoRepository tecnicoRepository,
             SedeRepository sedeRepository,
-            TecnicoMapper tecnicoMapper
+            TecnicoMapper tecnicoMapper,
+            PasswordEncoder passwordEncoder
     ) {
         this.tecnicoRepository = tecnicoRepository;
         this.sedeRepository = sedeRepository;
         this.tecnicoMapper = tecnicoMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class TecnicoServiceImpl implements TecnicoService {
 
         Tecnico tecnico = new Tecnico(
                 request.nombre(),
-                request.password(),
+                passwordEncoder.encode(request.password()),
                 "SOPORTE",
                 request.especialidad(),
                 request.telefono(),
